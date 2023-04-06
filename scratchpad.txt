@@ -1,0 +1,12 @@
+USER MODEL
+------------------
+email: string --unique in the database 
+password: string -- string (not plain texted)--hashed in the database
+
+sequelize model:create --name user --attributes email:string,password:string
+# if you want to add more colums follow these instructions 
+1. sequelize db:migrate:undo:all -- remove user in db
+2. options:
+edit BOTH the user model and user migration to add columns
+or
+rm model/user.js migrateions/<the user migration>.js and then return new model create command
