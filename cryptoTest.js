@@ -40,7 +40,8 @@ const crypto = require('crypto')
 
 //Encryption
 
-//two way proccess where data is 'locked' in an encryptionstring using a key and the key can remove the data from the string. it is a two way process 
+//two way proccess where data is 'locked' in an encryptionstring using a key and the key can remove the data from the string. it is a two way process
+//store primarykey as the logged in user.
 
 const cryptoJs = require('crypto-js')
 

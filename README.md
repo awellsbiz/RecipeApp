@@ -16,16 +16,28 @@ As a user, I want to beable to leave notes on recipes
 
 https://www.themealdb.com/api.php
 
-## wireframes of all user views
+## WIREFRAMES
 
-https://drive.google.com/file/d/17D-DXMdAx74489reTI0ecMtqmcatoZvh/view?usp=sharing
+![img](Wireframe 1.png)
+![img](Wireframe 2.png)
+![img](Wireframe 3.png)
+![img](Wireframe 4.png)
+![img](Wireframe 5.png)
+![img](Wireframe 6.png)
+
 
 # ERD
 ![img](ERD.png)
 
-# REST chart
+# RESTful CHART
 
-https://hackmd.io/@dZ7TJN2uQfiOzj2-gcmuHw/rJn6xc_b2
+![img](RESTful chart 1.png)
+![img](RESTful chart 2.png)
+
+# Install Instructions
+
+-use `npm i` to install dependencies. Here is a list of dependencies used for this project:
+    bcrypt, cookie-parser, crypto-js, dotenv, ejs, express, pg, sequelize
 
 ## MVP GOALS
 
