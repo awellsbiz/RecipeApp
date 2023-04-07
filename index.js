@@ -14,7 +14,7 @@ app.set('view engine', 'ejs')
 //parse html from request bodies
 app.use(express.urlencoded({extended:false}))
 //tells express to parse incoming cookies sent from browser
-app.use(cookieParser)
+app.use(cookieParser())
 app.use((req, res, next) => {
         //incomming request console logger
         console.log(`[${new Date().toLocaleString()}]: ${req.method} ${req.url}`)
