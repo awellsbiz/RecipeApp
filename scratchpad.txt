@@ -10,3 +10,23 @@ sequelize model:create --name user --attributes email:string,password:string
 edit BOTH the user model and user migration to add columns
 or
 rm model/user.js migrateions/<the user migration>.js and then return new model create command
+
+
+TECH REQUIRMENTS FOR P2
+-------------------------------
+-- Have at least 2 models (more if they make sense) that represents the main functional idea for your app. This doesn't include join tables or the user model which should be part of your class's boilerplate code.
+        Model 1: Saved recipes
+        Model 2: Leave notes on recipes
+
+-- Incorporate at least one API
+        API: https://www.themealdb.com/api.php
+
+-*- Have complete RESTful routes for at least one of your resources with GET, POST, PUT, and DELETE
+
+-- Utilize an ORM to create a database table structure aka sequelize 
+
+-*- Include a readme file 
+
+-- Have semantically clean HTML, CSS, and back-end code
+
+-- Be deployed online and accessible to the public

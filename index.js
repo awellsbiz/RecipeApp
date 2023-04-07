@@ -13,10 +13,11 @@ app.use(express.urlencoded({extended:false}))
 
 //routes and controllers
 app.get('/', (req,res) => {
-    res.send('Welcome to the auth api')
+    res.render('index.ejs')
 })
 
-app.use('/users', require('./controllers/users.js'))
+app.use('/user', require('./controllers/users.js'))
+
 //listen on a port
 app.listen(PORT, () => {
     console.log(`authenticating user on ${PORT}`)
