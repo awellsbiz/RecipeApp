@@ -18,22 +18,22 @@ https://www.themealdb.com/api.php
 
 ## WIREFRAMES
 
-![Getting Started](Wireframe1.png)
-![Getting Started](Wireframe2.png)
-![Getting Started](Wireframe3.png)
-![Getting Started](Wireframe4.png)
-![Getting Started](Wireframe5.png)
-![Getting Started](Wireframe6.png)
+![Getting Started](Photos/Wireframe1.png)
+![Getting Started](Photos/Wireframe2.png)
+![Getting Started](Photos/Wireframe3.png)
+![Getting Started](Photos/Wireframe4.png)
+![Getting Started](Photos/Wireframe5.png)
+![Getting Started](Photos/Wireframe6.png)
 
 
 
 # ERD
-![img](ERD.png)
+![img](Photos/ERD.png)
 
 # RESTful CHART
 
-![img](RESTful_chart_1.png)
-![img](RESTful_chart_2.png)
+![img](Photos/RESTful_chart_1.png)
+![img](Photos/RESTful_chart_2.png)
 
 # Install Instructions
 
