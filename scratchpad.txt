@@ -20,8 +20,10 @@ TECH REQUIRMENTS FOR P2
 
 -- Incorporate at least one API
         API: https://www.themealdb.com/api.php
+        *no api keys in github code (used a .env file)
 
 -*- Have complete RESTful routes for at least one of your resources with GET, POST, PUT, and DELETE
+        -*-At LEAST 2 GET ROUTES
 
 -- Utilize an ORM to create a database table structure aka sequelize 
 
@@ -30,3 +32,7 @@ TECH REQUIRMENTS FOR P2
 -- Have semantically clean HTML, CSS, and back-end code
 
 -- Be deployed online and accessible to the public
+
+PITCH REQUIREMENTS 
+--------------------
+
