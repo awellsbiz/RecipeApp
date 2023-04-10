@@ -77,6 +77,7 @@ app.get('/', async (req, res) => {
 
 app.use('/users', require('./controllers/users.js'))
 app.use('/recipes', require('./controllers/recipes.js'))
+app.use('/notes', require('./controllers/notes.js'))
 
 //listen on a port
 app.listen(PORT, () => {
