@@ -33,6 +33,56 @@ TECH REQUIRMENTS FOR P2
 
 -- Be deployed online and accessible to the public
 
-PITCH REQUIREMENTS 
+Edamam 
 --------------------
+
+app_id: 6a163ebc
+
+api_key: 084743de298678b45b71dc51a8ac3653
+
+
+------------------
+
+ <ul>
+        <% data.forEach(recipe => { %>
+            <li><%= console.log(data)%></li>
+        
+        <% }); %>
+    </ul>
+
+
+       .then(response => { 
+        console.log(response.data) 
+    }) 
+
+    ----------
+
+CODE for accessing api and listing recipe name ingredients and a picture for reference
+
+
+
+
+
+
+
+-EJS-
+<div>
+    <p>
+        This is the API test:
+    </p>
+    <ul>
+    <% recipes.forEach(recipe => { %>
+        <li><%= recipe.recipe.label %></li>
+        <ul>
+            <% recipe.recipe.ingredientLines.forEach(ingredient => { %>
+               <li> <%= ingredient %> </li>
+           <% }) %>
+        </ul>
+        <img src="<%= recipe.recipe.image %>" >
+    
+    <% }); %>
+</ul>
+
+</div>
+
 

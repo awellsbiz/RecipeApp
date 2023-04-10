@@ -1,9 +1,10 @@
 // require packages
 require('dotenv').config()
 const express = require('express')
+const axios = require('axios')
 const cookieParser = require('cookie-parser')
 const cryptoJS = require('crypto-js')
-const db = require('./models')
+const db = require('./models') 
 
 //app configs 
 const app = express()
@@ -53,12 +54,29 @@ app.use(async (req,res, next) => {
 })
 
 //routes and controllers
-app.get('/', (req, res) => {
-    console.log(res.locals)
-    res.render("index.ejs")
+app.get('/', async (req, res) => {
+
+    try {
+        const apiKey= '084743de298678b45b71dc51a8ac3653'
+        const apiId = '6a163ebc'
+        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=${apiId}&app_key=${apiKey}`
+       
+    const response = await axios.get(url)
+    console.log(response.data)
+    const recipeData = response.data.hits
+    res.render("index.ejs", {recipes: recipeData})
+
+
+    } catch(error){
+        console.log(error)
+        res.send('error')
+    }
+
+
 })
 
 app.use('/users', require('./controllers/users.js'))
+app.use('/recipes', require('./controllers/recipes.js'))
 
 //listen on a port
 app.listen(PORT, () => {

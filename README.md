@@ -14,7 +14,7 @@ As a user, I want to beable to leave notes on recipes
 
 # API
 
-https://www.themealdb.com/api.php
+https://www.edamam.com/
 
 ## WIREFRAMES
 
