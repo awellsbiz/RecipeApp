@@ -1,6 +1,27 @@
 <%- include("./partials/header.ejs", { user: user}) %>
 
-<h1>Welcome User to the Auth App</h1>
+
+<div class="indexDiv">
+<div class="mx-auto" style="width: 50vw;">
+<div class="text-center">
+<h1>Welcome</h1>
+<p>This app will display a list of ingredients for Chefs and home cooks to reference for their favorite recipes. Don't forget to save you favorite ingredients and leave notes for yourself. </p>
+</div>
+</div>
+
+<div class="mx-auto" style="width: 50vw;">
+<div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Sign Up or Log In</h5>
+
+      <a href="/users/new" class="btn btn-primary">Sign Up</a>
+      <a href="/users/login" class="btn btn-primary">Log In</a>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
 
 
 <%- include("./partials/footer.ejs") %>

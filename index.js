@@ -11,7 +11,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 app.set('view engine', 'ejs')
 
-//middlewares
+//middlewares for login auth
 //parse html from request bodies
 app.use(express.urlencoded({extended:false}))
 //tells express to parse incoming cookies sent from browser
@@ -24,6 +24,7 @@ app.use((req, res, next) => {
         //res.locals.myData = 'hi 👋🏾'
     next()// tells express that this middle ware has been finished
 })
+
 //custom auth middleware
 app.use(async (req,res, next) => {
     try{
@@ -53,19 +54,12 @@ app.use(async (req,res, next) => {
     }
 })
 
-//routes and controllers
+//ROUTE
+
 app.get('/', async (req, res) => {
 
     try {
-        const apiKey= '084743de298678b45b71dc51a8ac3653'
-        const apiId = '6a163ebc'
-        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=${apiId}&app_key=${apiKey}`
-       
-    const response = await axios.get(url)
-    console.log(response.data)
-    const recipeData = response.data.hits
-    res.render("index.ejs", {recipes: recipeData})
-
+    res.render("index.ejs")
 
     } catch(error){
         console.log(error)
@@ -75,9 +69,14 @@ app.get('/', async (req, res) => {
 
 })
 
+//middleware to connect to controllers and css
+
 app.use('/users', require('./controllers/users.js'))
 app.use('/recipes', require('./controllers/recipes.js'))
 app.use('/notes', require('./controllers/notes.js'))
+app.use(express.static('public'))
+
+
 
 //listen on a port
 app.listen(PORT, () => {

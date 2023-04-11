@@ -4,6 +4,10 @@ email: string --unique in the database
 password: string -- string (not plain texted)--hashed in the database
 
 sequelize model:create --name user --attributes email:string,password:string
+sequelize model:create --name recipe --attributes label:string,ingredientLines:string,url:string
+sequelize model:create --name comment --attributes name:string,recipeId:string,userId:string,comment:string
+
+sequelize model:create --name favorite --attributes userId:integer,recipeId:integer
 # if you want to add more colums follow these instructions 
 1. sequelize db:migrate:undo:all -- remove user in db
 2. options:
@@ -84,5 +88,90 @@ CODE for accessing api and listing recipe name ingredients and a picture for ref
 </ul>
 
 </div>
+
+
+----------------
+<nav>
+    <ul>
+<!-- shown whether the user is logged in or out  -->
+<li><a href="/">Home</a></li>
+<!-- shown whether the user is logged in -->
+<% if (user) { %>
+    <li><a href="/users/profile">profile</a></li>
+    <li><a href="/users/logout">logout</a></li>
+
+<% } else { %>
+<!-- shown whether the user is logged out  -->
+<li><a href="/users/new">sign up</a></li>
+<li><a href="/users/login">Sign in</a></li>
+<% } %>
+    </ul>
+
+
+</nav>
+
+
+--------------
+
+//routes and controllers
+app.get('/', async (req, res) => {
+
+    try {
+        const apiKey= '084743de298678b45b71dc51a8ac3653'
+        const apiId = '6a163ebc'
+        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=${apiId}&app_key=${apiKey}`
+       
+    const response = await axios.get(url)
+    console.log(response.data)
+    const recipeData = response.data.hits
+    res.render("index.ejs", {recipes: recipeData})
+
+
+    } catch(error){
+        console.log(error)
+        res.send('error')
+    }
+
+
+})
+
+
+------------
+
+router.get('/profile', (req,res) => {
+   //if the user comes and is not logged -- they lack authorization
+   if(!res.locals.user) {
+       //redirect the to login
+        res.redirect('/users/login?message"You are not authorized to view that page. Please authenticate to continue')
+   }else{
+       //if ther are allowed to be here show them their profile
+       res.render('users/profile.ejs')
+
+   }
+})
+
+
+--------------
+
+<body>
+    
+<nav>
+    <ul>
+<!-- shown whether the user is logged in or out  -->
+<li><a href="/">Home</a></li>
+<!-- shown whether the user is logged in -->
+<% if (user) { %>
+    <li><a href="/users/profile">profile</a></li>
+    <li><a href="/users/logout">logout</a></li>
+
+<% } else { %>
+<!-- shown whether the user is logged out  -->
+<li><a href="/users/new">sign up</a></li>
+<li><a href="/users/login">Sign in</a></li>
+<% } %>
+    </ul>
+
+
+</nav>
 
 

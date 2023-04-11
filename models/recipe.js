@@ -11,8 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      //models
-      models.recipe.hasMany(Comment)
     }
   }
   recipe.init({

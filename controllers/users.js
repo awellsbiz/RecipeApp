@@ -11,48 +11,50 @@ router.get('/new', (req,res) => {
 })
 
 
+
 //POST /user -- Create a new user from the form @ get /users/new
 
 router.post('/', async (req,res) => {
     //do a find or create with the users given email
     try {
-        console.log(req,body)
+        //console.log(req.body)
         const [newUser, created] = await db.user.findOrCreate({
-            where: {
-                email: req.body.email
-            }
-        })
-        if (!created) {
-
-        //if the user's returns as found -- dont let them sign up
-        console.log('user account exist')
-        // instead redirect them to the login page
-        res.redirect('./users/login?message=Please login to your account to continue 🙈')
-        }else{
-
-            //hash the users password before we add it in the database
-            const hashedPassed = bcrypt.hashSync(req.body.password, 12)
-            //save the user in the password
-            newUser.password = hashedPassed
-            await newUser.save()
-            //encrypt the logged in user id 
-            const encryptedPk = cryptoJs.AES.encrypt(newUser.id.toString(), process.env.ENC_KEY)
-            //set encrypted id as a cookie
-            res.cookie('userId', encryptedPk.toString())
-            //redirect user
-            res.redirect('/users/profile')
-
-        }
-    }catch(err) {
-        console.log(err)
-        res.redirect('/')
+                where: {
+                        email: req.body.email
+                    }
+                })
+                if (!created) {
+                    
+                    //if the user's returns as found -- dont let them sign up
+                    //console.log('user account exist')
+                    // instead redirect them to the login page
+                    res.redirect('/users/login?message=Please login to your account to continue 🙈')
+                    }else{
+                        
+                            //hash the users password before we add it in the database
+                            const hashedPassed = bcrypt.hashSync(req.body.password, 12)
+                            //save the user in the password
+                            newUser.password = hashedPassed
+                            await newUser.save()
+                            //encrypt the logged in user id 
+                            const encryptedPk = cryptoJs.AES.encrypt(newUser.id.toString(), process.env.ENC_KEY)
+                            //set encrypted id as a cookie
+                            res.cookie('userId', encryptedPk.toString())
+                            //redirect user
+                            res.redirect('/recipes')
+                        
+                        }
+                    }catch(err) {
+                        console.log(err)
+                        res.redirect('/')
+                        //res.render('users/profile.ejs')
     }                  
 })
 
 //GET /users/login -- show rout for a form that lets user log in
 
 router.get('/login', (req,res) => {
-    console.log(req.query)
+    //console.log(req.query)
     res.render('users/login.ejs', {
         message: req.query.message ? req.query.message : null
     })
@@ -61,7 +63,7 @@ router.get('/login', (req,res) => {
 //POST /users/login -- authenticat a users credentials (breaking rest rules here cause POST is not CREATE-- techincally its a READ  )
 router.post('/login', async (req,res) => {
     try{
-        console.log(req.body)
+        //console.log(req.body)
         //search for the users email in the DB
         const foundUser = await db.user.findOne({
             where: {
@@ -71,10 +73,10 @@ router.post('/login', async (req,res) => {
         const failedLoginMessage = "incorrect email or password 🧐"
             //if the users email is not found -- do not let them log in
             if (!foundUser) {
-                console.log('user not found')
+                //console.log('user not found')
                 res.redirect('/users/login?message=' + failedLoginMessage)
             }else if (!bcrypt.compareSync(req.body.password, foundUser.password)) {
-                console.log("incorrect PW")
+                //console.log("incorrect PW")
                 //if the user exist but they have the wrong password-- do not let them log in
                 
                 res.redirect('/users/login?message=' + failedLoginMessage)
@@ -85,7 +87,7 @@ router.post('/login', async (req,res) => {
                 //set encrypted id as a cookie
                 res.cookie('userId', encryptedPk.toString())
                 //redirect user
-                res.redirect('/users/profile')
+                res.redirect('./profile')
                 //set the encrypted PK as a cookie
                 //redirect them to their profile
             }
@@ -116,6 +118,7 @@ router.get('/profile', (req,res) => {
 
    }
 })
+
 
 //export router
 module.exports = router

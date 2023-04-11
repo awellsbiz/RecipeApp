@@ -1,16 +1,29 @@
 //Requiree the packages that I need
 const express = require('express')
 const router = express.Router()
+const axios = require('axios')
 const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptoJs = require('crypto-js')
+require('dotenv').config()
+
+//middleware
+
 
 //Routes
 
 //GET /recipes -- Search bar to search for recipes
 router.get('/', async (req,res) => {
     try{
-        res.send('this is for Recipe Ingredient search')
+        //console.log('req.query', req.query)
+        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${req.query.search}&app_id=${process.env.API_ID}&app_key=${process.env.API_KEY}`
+        
+        const response = await axios.get(url)
+        //console.log(response.data)
+        const recipeData = response.data.hits
+        res.render("users/search", {recipes: recipeData})
+        
+        
     }catch(error){
         console.log(error)
     }
@@ -28,7 +41,13 @@ router.get('/results', async (req,res) => {
 //POST /:label -- save recipe ingredient to the recipes db
 router.post('/:label', async (req,res) => {
     try{
-        res.send('POST saved recipe in this route')
+        console.log("req.params:", req.params.label)
+        //console.log('req.body.ingredientLines:', recipe.recipe.ingredients)
+        const favRecipes = await db.recipe.create({
+            label: req.params.label
+        })
+        console.log("we are going to get through this!")
+        res.send(favRecipes)
     }catch(error){
         console.log(error)
     }
