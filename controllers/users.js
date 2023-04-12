@@ -88,7 +88,7 @@ router.post('/login', async (req,res) => {
                 //set encrypted id as a cookie
                 res.cookie('userId', encryptedPk.toString())
                 //redirect user
-                res.redirect('./profile')
+                res.redirect('/favorites')
                 //set the encrypted PK as a cookie
                 //redirect them to their profile
             }

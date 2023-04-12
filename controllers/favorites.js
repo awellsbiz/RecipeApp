@@ -4,6 +4,7 @@ const router = express.Router()
 const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptoJs = require('crypto-js')
+//const recipeFaves = require('../models/recipe')
 
 //ROUTES
 //POST /recipe/:label -- this route will add a note recipes
@@ -16,9 +17,14 @@ router.post('/recipes/:label', async (req,res) => {
 })
 
 //GET /user/:userId/favorite -- READ list of users saved recipes w comments 
-router.get('/user/:userId', async (req,res) => {
+router.get('/', async (req,res) => {
     try{
-        res.send('Showing full saved list of recipes')
+        // const userData = await db.user.findOne({
+        //     include: [db.recipe]
+        // })
+        // console.log("log faves:", userData)
+        console.log(res.locals.user)
+        res.render('users/profile', { userData: res.locals.user })
     }catch(err){
         console.log(err)
     }

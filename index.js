@@ -34,7 +34,9 @@ app.use(async (req,res, next) => {
             //if so we will decrypt the cookie and lookup the user using their PK
             const decryptedPk = cryptoJS.AES.decrypt(req.cookies.userId, process.env.ENC_KEY)
             const decryptedPkString = decryptedPk.toString(cryptoJS.enc.Utf8)
-            const user = await db.user.findByPk(decryptedPkString)//eager loading can be done here
+            const user = await db.user.findByPk(decryptedPkString, {
+                include: db.recipe
+            })//eager loading can be done here
             //mount the found user in the res.locals
             //in all other routes you can assume that the res.locals.user is the currently logged in user
             res.locals.user = user
@@ -73,7 +75,7 @@ app.get('/', async (req, res) => {
 
 app.use('/users', require('./controllers/users.js'))
 app.use('/recipes', require('./controllers/recipes.js'))
-app.use('/notes', require('./controllers/notes.js'))
+app.use('/favorites', require('./controllers/favorites.js'))
 app.use(express.static('public'))
 
 
