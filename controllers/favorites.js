@@ -10,8 +10,8 @@ const cryptoJs = require('crypto-js')
 //POST /recipe/:label -- this route will add a note recipes
 router.post('/recipes/:recipeId', async (req,res) => {
     try{
-        const commentBody = req.body.comment
-        console.log("look at me",commentBody)
+        // const commentBody = await db.comments.comment
+        console.log("look at me", commentBody)
         res.send('put a note on me')
     }catch(err){
         console.log(err)
@@ -21,12 +21,11 @@ router.post('/recipes/:recipeId', async (req,res) => {
 //GET /user/:userId/favorite -- READ list of users saved recipes w comments 
 router.get('/', async (req,res) => {
     try{
-        const recipeData = await db.recipe.findOne({
-            include: [db.recipe]
-        })
+        const user = await db.user.findByPk(res.locals.user.id)
         // console.log("log faves:", userData)
         console.log(res.locals.user)
-        res.render('users/profile', { userData: res.locals.user })
+        console.log(user)
+        res.render('users/profile', { userData: res.locals.user})
     }catch(err){
         console.log(err)
     }

@@ -47,7 +47,9 @@ router.post('/:label', async (req,res) => {
             label: req.params.label,
             url: req.body.url
         })
-        res.send(favRecipes)
+        const user = await db.user.findByPk(res.locals.user.id)
+        await user.addRecipe(favRecipes)
+        res.redirect('/users/profile')
     }catch(error){
         console.log(error)
     }
