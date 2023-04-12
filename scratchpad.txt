@@ -3,11 +3,11 @@ USER MODEL
 email: string --unique in the database 
 password: string -- string (not plain texted)--hashed in the database
 
-sequelize model:create --name user --attributes email:string,password:string
+sequelize model:create --name user --attributes name:string,email:string,password:string
 sequelize model:create --name recipe --attributes label:string,ingredientLines:string,url:string
 sequelize model:create --name comment --attributes name:string,recipeId:string,userId:string,comment:string
 
-sequelize model:create --name favorite --attributes userId:integer,recipeId:integer
+sequelize model:create --name favorites --attributes userId:integer,recipeId:integer
 # if you want to add more colums follow these instructions 
 1. sequelize db:migrate:undo:all -- remove user in db
 2. options:

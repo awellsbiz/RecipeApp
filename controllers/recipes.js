@@ -41,12 +41,12 @@ router.get('/results', async (req,res) => {
 //POST /:label -- save recipe ingredient to the recipes db
 router.post('/:label', async (req,res) => {
     try{
-        console.log("req.params:", req.params.label)
+        console.log("req.body:", req.body.url)
         //console.log('req.body.ingredientLines:', recipe.recipe.ingredients)
         const favRecipes = await db.recipe.create({
-            label: req.params.label
+            label: req.params.label,
+            url: req.body.url
         })
-        console.log("we are going to get through this!")
         res.send(favRecipes)
     }catch(error){
         console.log(error)

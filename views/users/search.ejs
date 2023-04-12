@@ -15,6 +15,7 @@
     <div class="row">
       <% recipes.forEach(recipe => { %>
         <div class="col-3 mb-3">
+        <form method="POST" action="/recipes/<%=recipe.recipe.label%>">
           <div class="card">
             <img src="<%= recipe.recipe.image %>" class="card-img-top" alt="<%= recipe.recipe.label %>">
             <div class="card-body">
@@ -24,18 +25,27 @@
                   <li class="list-group-item"><%= ingredient %></li>
                   <% }) %>
                 </ul>
-                <form method="POST" action="/recipes/<%=recipe.recipe.label%>">
-                <button class="btn btn-primary save-recipe" data-recipe-id="<%= recipe.recipe.uri %>">Save Recipe</button>
+              </form>
+              <button class="btn btn-primary">Save Recipe</button>
+              <div class="form-group">
+                <input type="hidden" name="url" value="<%=recipe.recipe.url%>">
+                <a href="<%= recipe.recipe.url %>"><h6>click here for directions</h6></a>
+                  <label for="comment">Comment:</label>
+                  <textarea class="form-control" id="comment" rows="5"></textarea>
+                  <div class="mt-2">
+                    <button class="btn btn-primary btn-sm" id="submit-comment">Submit</button>
+                    <button class="btn btn-secondary btn-sm" id="edit-comment">Edit</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        <% }); %>
-      </div>
-    <%} else { %>
-      <p>No recipes found.</p>
-      <% } %>
-    </form>
-  
+          <% }); %>
+        </div>
+        <%} else { %>
+          <p>No recipes found.</p>
+          <% } %>
+          
 
 
 <%- include('../partials/footer.ejs') %>

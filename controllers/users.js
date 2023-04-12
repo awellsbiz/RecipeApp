@@ -20,6 +20,7 @@ router.post('/', async (req,res) => {
         //console.log(req.body)
         const [newUser, created] = await db.user.findOrCreate({
                 where: {
+                        name: req.body.name,
                         email: req.body.email
                     }
                 })
@@ -41,7 +42,7 @@ router.post('/', async (req,res) => {
                             //set encrypted id as a cookie
                             res.cookie('userId', encryptedPk.toString())
                             //redirect user
-                            res.redirect('/recipes')
+                            res.redirect('./profile')
                         
                         }
                     }catch(err) {
