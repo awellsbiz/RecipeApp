@@ -8,17 +8,39 @@ const cryptoJs = require('crypto-js')
 
 //ROUTES
 //POST /recipe/:label -- this route will add a note recipes
-router.post('/recipes/:recipeId', async (req,res) => {
+router.post('/:recipeId', async (req,res) => {
     try{
-        // const commentBody = await db.comments.comment
-        console.log("look at me", commentBody)
-        res.send('put a note on me')
+        const comment = req.body.comment
+       const newComment = await db.comment.create({comment: comment, recipeId: req.params.recipeId})
+       console.log(newComment.recipe)
+        res.redirect('/favorites')
     }catch(err){
         console.log(err)
     }
 })
 
-//GET /user/:userId/favorite -- READ list of users saved recipes w comments 
+//GET /commentId -- load the comment to be edited
+router.get('/:commentId', async (req,res) => {
+    try{
+        const comment = await db.comment.findByPk(res.params.commentId)
+        res.render('comments/edit', { comment: comment })
+    }catch(err){
+        console.log(err)
+    }
+})
+
+//PUT /:commentID -- UPDATE the comment
+router.put('/:commentId', async (req,res) => {
+    try{
+        const comment = await db.comment.findByPk(res.params.commentId)
+        // edit the comment comment.update({comment: req.body.text})
+        res.redirect('/favorites')
+    }catch(err){
+        console.log(err)
+    }
+})
+
+//GET /favorite -- READ list of users saved recipes w comments 
 router.get('/', async (req,res) => {
     try{
         const user = await db.user.findByPk(res.locals.user.id)
