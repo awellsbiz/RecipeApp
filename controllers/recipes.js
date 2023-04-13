@@ -30,19 +30,18 @@ router.get('/', async (req,res) => {
     }
 })
 
-//GET /recipes -- Display a list of searched items
-router.get('/results', async (req,res) => {
-    try{
-        res.send('A list of ingredient results')
-    }catch(error){
-        console.log(error)
-    }
-})
+// //GET /recipes -- Display a list of searched items
+// router.get('/results', async (req,res) => {
+//     try{
+//         res.send('A list of ingredient results')
+//     }catch(error){
+//         console.log(error)
+//     }
+// })
 
 //POST /:label -- save recipe ingredient to the recipes db
 router.post('/:label', async (req,res) => {
     try{
-        console.log("req.body:", req.body.url)
         //console.log('req.body.ingredientLines:', recipe.recipe.ingredients)
         const favRecipes = await db.recipe.create({
             label: req.params.label,
@@ -50,6 +49,7 @@ router.post('/:label', async (req,res) => {
         })
         const user = await db.user.findByPk(res.locals.user.id)
         await user.addRecipe(favRecipes)
+        
         res.redirect('/users/profile')
     }catch(error){
         console.log(error)

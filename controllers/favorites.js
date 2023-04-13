@@ -10,8 +10,10 @@ const cryptoJs = require('crypto-js')
 //POST /recipe/:label -- this route will add a note recipes
 router.post('/:recipeId', async (req,res) => {
     try{
-        const comment = req.body.comment
-       const newComment = await db.comment.create({comment: comment, recipeId: req.params.recipeId})
+        //accsessing to work around the error of sequelize not accepting the array
+        const comment = req.body.comment[1]
+        console.log("Im right here", comment)
+       const newComment = await db.comment.create({comment: comment})
        console.log(newComment.recipe)
         res.redirect('/favorites')
     }catch(err){
