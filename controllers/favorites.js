@@ -22,8 +22,9 @@ router.post('/:recipeId', async (req,res) => {
 //GET /commentId -- load the comment to be edited
 router.get('/:commentId', async (req,res) => {
     try{
-        const comment = await db.comment.findByPk(res.params.commentId)
-        res.render('comments/edit', { comment: comment })
+        const comment = await db.comment.findByPk(req.params.commentId)
+        console.log('here', comment)
+        res.render('/', { comment: comment })
     }catch(err){
         console.log(err)
     }
@@ -32,7 +33,7 @@ router.get('/:commentId', async (req,res) => {
 //PUT /:commentID -- UPDATE the comment
 router.put('/:commentId', async (req,res) => {
     try{
-        const comment = await db.comment.findByPk(res.params.commentId)
+        const comment = await db.comment.findByPk(req.params.commentId)
         // edit the comment comment.update({comment: req.body.text})
         res.redirect('/favorites')
     }catch(err){

@@ -4,22 +4,34 @@
 <p>Here are your favorite recipes:</p>
 
 
-<div class="card" style="width: 18rem;">
-    <% userData.recipes.forEach(recipe => {%>
-    <div class="card-body">
-            <h5 class="card-title"><%= recipe.label %></h5>
-            <%})%>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <label for="comment">Comment:</label>
-    <textarea class="form-control" id="comment" rows="5"></textarea>
-    <div class="mt-2">
-    <button class="btn btn-primary btn-sm" id="submit-comment">Submit</button>
-    <button class="btn btn-secondary btn-sm" id="edit-comment">Edit</button>
-    <br />
-    <a href="/recipes/:recipeid" class="btn btn-primary">remove</a>
+<div class="row">
+  <% user.recipes.forEach(recipe => { %>
+  <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= recipe.label %></h5>
+        <p class="card-text"><a href="<%= recipe.url %>">Click for Directions</a></p>
+        <label for="comment">Comment:</label>
+        <p><%= recipe.comment %></p>
+        <div class="mt-2">
+          <% user.recipe.comment.forEach(comments => { %>
+            <div><%= comments.comments %></div>
+          <% }) %>
+          <form method="POST" action="/favorites/<%=recipe.id%>">
+            <input type="hidden" name="comment" value="<%=recipe.comment%>">
+            <textarea name="comment" class="form-control" rows="5"></textarea>
+            <button class="btn btn-primary btn-sm" id="submit-comment">Submit</button>
+          </form>
+          <button class="btn btn-secondary btn-sm" id="edit-comment">Edit</button>
+          <br />
+          <a href="/favorites/recipes/:recipeid" class="btn btn-primary">Remove</a>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
+  <% }) %>
+</div>
+
  
 
 <p>Click this link to add recipes to your profile!</p>

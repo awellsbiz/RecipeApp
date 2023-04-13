@@ -6,6 +6,7 @@ const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptoJs = require('crypto-js')
 require('dotenv').config()
+const methodOverride = require('method-override')
 
 //middleware
 
@@ -58,7 +59,7 @@ router.post('/:label', async (req,res) => {
 //DELETE /:label -- Delete the recipe out of the db
 router.delete('/:label', async (req,res) => {
     try{
-        res.send('Delete it')
+        
     }catch(error){
         console.log(error)
     }

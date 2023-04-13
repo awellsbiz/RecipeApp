@@ -108,17 +108,25 @@ router.get('/logout', (req,res) => {
 })
 
 //GET /users/profiles -- show autorize users their profile page 
-router.get('/profile', (req,res) => {
-   //if the user comes and is not logged -- they lack authorization
-   if(!res.locals.user) {
-       //redirect the to login
-        res.redirect('/users/login?message"You are not authorized to view that page. Please authenticate to continue')
-   }else{
-       //if ther are allowed to be here show them their profile
-       res.render('users/profile.ejs')
+router.get('/profile', async (req,res) => {
+    try {
+        const user = await db.user.findByPk(res.locals.user.id)
+        console.log(user)
+        
+        //if the user comes and is not logged -- they lack authorization
+        if(!res.locals.user) {
+            //redirect the to login
+            res.redirect('/users/login?message"You are not authorized to view that page. Please authenticate to continue')
+        }else{
+            //if ther are allowed to be here show them their profile
+            res.render('users/profile.ejs')
+            
+        }
 
-   }
-})
+    }catch(err){
+        console.log(err)
+    }
+    })
 
 
 //export router
