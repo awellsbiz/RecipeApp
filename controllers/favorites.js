@@ -46,10 +46,10 @@ router.put('/:commentId', async (req,res) => {
 //GET /favorite -- READ list of users saved recipes w comments 
 router.get('/', async (req,res) => {
     try{
-        const user = await db.user.findByPk(res.locals.user.id)
-        // console.log("log faves:", userData)
-        console.log(res.locals.user)
-        console.log(user)
+        // const user = await db.user.findByPk(res.locals.user.id)
+        // // console.log("log faves:", userData)
+        // console.log("JUST SOMETHING", res.locals.user.recipes)
+        // console.log("a unique STRING", user.recipes)
         res.render('users/profile', { userData: res.locals.user})
     }catch(err){
         console.log(err)

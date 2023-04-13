@@ -12,9 +12,7 @@
         <h5 class="card-title"><%= recipe.label %></h5>
         <p class="card-text"><a href="<%= recipe.url %>">Click for Directions</a></p>
         <label for="comment">Comment:</label>
-        <p><%=  %></p>
         <div class="mt-2">
-          
           <form method="POST" action="/favorites/<%=recipe.id%>">
             <textarea name="comment" class="form-control" rows="5"></textarea>
             <button class="btn btn-primary btn-sm" id="submit-comment">Submit</button>

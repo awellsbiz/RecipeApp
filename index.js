@@ -28,6 +28,7 @@ app.use((req, res, next) => {
 //custom auth middleware
 app.use(async (req,res, next) => {
     try{
+        console.log("WATCH ME:", req.cookies.userId)
         //check if there is a cookie
         if (req.cookies.userId) {
 
@@ -35,10 +36,14 @@ app.use(async (req,res, next) => {
             const decryptedPk = cryptoJS.AES.decrypt(req.cookies.userId, process.env.ENC_KEY)
             const decryptedPkString = decryptedPk.toString(cryptoJS.enc.Utf8)
             const user = await db.user.findByPk(decryptedPkString, {
-                include: db.recipe
+                include: [{
+                    model: db.recipe,
+                    include: [db.comment]
+                }]
             })//eager loading can be done here
             //mount the found user in the res.locals
             //in all other routes you can assume that the res.locals.user is the currently logged in user
+            console.log(user)
             res.locals.user = user
             //res.locasl.user.addPet({})
         }else {
