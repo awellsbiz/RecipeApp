@@ -13,12 +13,9 @@ router.post('/:recipeId', async (req,res) => {
         //accsessing to work around the error of sequelize not accepting the array
         //can use this to associate user aswell 
         const recipe = await db.recipe.findByPk(req.params.recipeId)
-        console.log("SEE ME!!", req.params)
         const comment = req.body.comment
-        console.log("Im right here", comment)
        const newComment = await db.comment.create({comment: comment, })
        recipe.addComment(newComment)
-       console.log(newComment.recipe)
         res.redirect('/favorites')
     }catch(err){
         console.log(err)
@@ -29,7 +26,6 @@ router.post('/:recipeId', async (req,res) => {
 router.get('/:commentId', async (req,res) => {
     try{
         const comment = await db.comment.findByPk(req.params.commentId)
-        console.log('here', comment)
         res.render('/', { comment: comment })
     }catch(err){
         console.log(err)
@@ -73,15 +69,17 @@ router.put('/recipes/:label', async (req,res) => {
 })
 
 //Delete /recipe/:label -- DELETE the comment
-router.delete('/favorites/:label', async (req,res) => {
+router.delete('/:recipeId', async (req,res) => {
     try{
+        const recipeId = Number(req.params.recipeId)
         const deleteRecipe = await db.recipe.destroy({
             where: {
-                id: db.recipeId
+                id: recipeId
             }
         })
-        console.log(deleteRecipe)
-        res.redirect('/')
+        
+        console.log("watch this CONSOLE!!!!:")
+        res.redirect('/favorites')
     }catch(err){
         console.log(err)
     }

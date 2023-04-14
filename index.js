@@ -5,6 +5,7 @@ const axios = require('axios')
 const cookieParser = require('cookie-parser')
 const cryptoJS = require('crypto-js')
 const db = require('./models') 
+const methodOverride = require('method-override')
 
 //app configs 
 const app = express()
@@ -14,12 +15,13 @@ app.set('view engine', 'ejs')
 //middlewares for login auth
 //parse html from request bodies
 app.use(express.urlencoded({extended:false}))
+app.use(methodOverride('_method'))
 //tells express to parse incoming cookies sent from browser
 app.use(cookieParser())
 app.use((req, res, next) => {
         //incomming request console logger
         console.log(`[${new Date().toLocaleString()}]: ${req.method} ${req.url}`)
-        console.log('request body:', req.body)
+        //console.log('request body:', req.body)
         //send data downstream to the other routes
         //res.locals.myData = 'hi 👋🏾'
     next()// tells express that this middle ware has been finished
@@ -28,7 +30,6 @@ app.use((req, res, next) => {
 //custom auth middleware
 app.use(async (req,res, next) => {
     try{
-        console.log("WATCH ME:", req.cookies.userId)
         //check if there is a cookie
         if (req.cookies.userId) {
 
@@ -43,7 +44,7 @@ app.use(async (req,res, next) => {
             })//eager loading can be done here
             //mount the found user in the res.locals
             //in all other routes you can assume that the res.locals.user is the currently logged in user
-            console.log(user)
+            //console.log(user)
             res.locals.user = user
             //res.locasl.user.addPet({})
         }else {

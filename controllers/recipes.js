@@ -6,7 +6,7 @@ const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptoJs = require('crypto-js')
 require('dotenv').config()
-const methodOverride = require('method-override')
+
 
 //middleware
 
