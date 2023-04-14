@@ -12,6 +12,10 @@ As a user, I want to sign up with my email and password so I can save my favorit
 
 As a user, I want to beable to leave notes on recipes 
 
+# Link to Deployed Site
+
+https://project-2-auth-aw.herokuapp.com/
+
 # API
 
 https://www.edamam.com/
