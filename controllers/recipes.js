@@ -7,10 +7,6 @@ const bcrypt = require('bcrypt')
 const cryptoJs = require('crypto-js')
 require('dotenv').config()
 
-
-//middleware
-
-
 //Routes
 
 //GET /recipes -- Search bar to search for recipes
@@ -29,15 +25,6 @@ router.get('/', async (req,res) => {
         console.log(error)
     }
 })
-
-// //GET /recipes -- Display a list of searched items
-// router.get('/results', async (req,res) => {
-//     try{
-//         res.send('A list of ingredient results')
-//     }catch(error){
-//         console.log(error)
-//     }
-// })
 
 //POST /:label -- save recipe ingredient to the recipes db
 router.post('/:label', async (req,res) => {

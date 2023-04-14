@@ -1,19 +1,22 @@
 <%- include("../partials/header.ejs") %>
+<div style="margin: 7vw">
+<div class="text-center mx-auto">
+    <h2>Sign Up for an Account</h2>
+</div>
+<div class="card text-center mx-auto" style="width: 50vw">
+            <form method="POST" action="/users">
+                <label for="name">Name:</label>
+                <input type="name" name="name" id="name" required style="margin: 5px"/><br />
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required style="margin: 5px"/><br />
 
-<h2>Sign Up for an Account</h2>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required style="margin:5px"/><br />
 
-<form method="POST" action="/users">
-    <label for="name">Name:</label>
-    <input type="name" name="name" id="name" required/>
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required/>
-
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required />
-
-    <button type="submit">Sign Up!</button>
-
-</form>
+                <button class="btn btn-primary" type="submit">Sign Up!</button>
+            </form>
+</div>
+<div></div>
 
 
 <%- include("../partials/footer.ejs") %>

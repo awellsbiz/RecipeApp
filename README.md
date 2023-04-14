@@ -2,7 +2,7 @@
 
 ## Project Idea and Description
 
-Anthony's Recipe App will allow users to search for their favorite recipes. Signing up for this app will grant users the ability to save thier favorite recipes to a list stored on the app and leave comments for their reference.  
+Anthony's Recipe Search App will allow users to search for their favorite recipes. Signing up for this app will grant users the ability to save thier favorite recipes to a list stored on the app and leave comments for their reference.  
 
 ## USER STORIES
 
@@ -37,8 +37,12 @@ https://www.edamam.com/
 
 # Install Instructions
 
--use `npm i` to install dependencies. Here is a list of dependencies used for this project:
-    bcrypt, cookie-parser, crypto-js, dotenv, ejs, express, pg, sequelize
+- Fork and clone this repo
+
+- use `npm i` to install dependencies. Here is a list of dependencies used for this project:
+    bcrypt, cookie-parser, crypto-js, dotenv, ejs, express, pg, sequelize, method-override. Be sure to check your package.json to make sure the list is up to date
+
+- The api used is https://api.edamam.com/ make sure to sign up using the 'developer recipe search' plan.
 
 ## MVP GOALS
 

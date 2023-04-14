@@ -21,9 +21,6 @@ app.use(cookieParser())
 app.use((req, res, next) => {
         //incomming request console logger
         console.log(`[${new Date().toLocaleString()}]: ${req.method} ${req.url}`)
-        //console.log('request body:', req.body)
-        //send data downstream to the other routes
-        //res.locals.myData = 'hi 👋🏾'
     next()// tells express that this middle ware has been finished
 })
 
@@ -43,8 +40,6 @@ app.use(async (req,res, next) => {
                 }]
             })//eager loading can be done here
             //mount the found user in the res.locals
-            //in all other routes you can assume that the res.locals.user is the currently logged in user
-            //console.log(user)
             res.locals.user = user
             //res.locasl.user.addPet({})
         }else {

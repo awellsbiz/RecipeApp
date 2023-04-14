@@ -4,14 +4,11 @@ const router = express.Router()
 const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptoJs = require('crypto-js')
-//const recipeFaves = require('../models/recipe')
 
 //ROUTES
-//POST /recipe/:label -- this route will add a note recipes
+//POST /:label -- this route will add a comment to recipes
 router.post('/:recipeId', async (req,res) => {
     try{
-        //accsessing to work around the error of sequelize not accepting the array
-        //can use this to associate user aswell 
         const recipe = await db.recipe.findByPk(req.params.recipeId)
         const comment = req.body.comment
        const newComment = await db.comment.create({comment: comment, })
@@ -32,6 +29,19 @@ router.get('/:commentId', async (req,res) => {
     }
 })
 
+//GET /favorite -- READ list of users saved recipes + comments 
+router.get('/', async (req,res) => {
+    try{
+        const recipeLookUp = await db.recipe.findAll({
+            include: [db.comment]
+        })
+        res.render('users/profile', { recipes: recipeLookUp})
+        
+    }catch(err){
+        console.log(err)
+    }
+})
+
 //PUT /:commentID -- UPDATE the comment
 router.put('/:commentId', async (req,res) => {
     try{
@@ -45,30 +55,6 @@ router.put('/:commentId', async (req,res) => {
     }
 })
 
-//GET /favorite -- READ list of users saved recipes w comments 
-router.get('/', async (req,res) => {
-    try{
-        // const user = await db.user.findByPk(res.locals.user.id)
-        // // console.log("log faves:", userData)
-        // console.log("JUST SOMETHING", res.locals.user.recipes)
-        // console.log("a unique STRING", user.recipes)
-        const recipeLookUp = await db.recipe.findAll({
-            include: [db.comment]
-        })
-        res.render('users/profile', { recipes: recipeLookUp})
-    }catch(err){
-        console.log(err)
-    }
-})
-
-//PUT /recipe/:label -- UPDATE the comment
-router.put('/:recipeId', async (req,res) => {
-    try{
-        res.send('Edit my comment')
-    }catch(err){
-        console.log(err)
-    }
-})
 
 //Delete /recipe/:label -- DELETE the comment
 router.delete('/:recipeId', async (req,res) => {
