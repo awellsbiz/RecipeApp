@@ -11,9 +11,13 @@ const cryptoJs = require('crypto-js')
 router.post('/:recipeId', async (req,res) => {
     try{
         //accsessing to work around the error of sequelize not accepting the array
-        const comment = req.body.comment[1]
+        //can use this to associate user aswell 
+        const recipe = await db.recipe.findByPk(req.params.recipeId)
+        console.log("SEE ME!!", req.params)
+        const comment = req.body.comment
         console.log("Im right here", comment)
-       const newComment = await db.comment.create({comment: comment})
+       const newComment = await db.comment.create({comment: comment, })
+       recipe.addComment(newComment)
        console.log(newComment.recipe)
         res.redirect('/favorites')
     }catch(err){
@@ -50,7 +54,10 @@ router.get('/', async (req,res) => {
         // // console.log("log faves:", userData)
         // console.log("JUST SOMETHING", res.locals.user.recipes)
         // console.log("a unique STRING", user.recipes)
-        res.render('users/profile', { userData: res.locals.user})
+        const recipeLookUp = await db.recipe.findAll({
+            include: [db.comment]
+        })
+        res.render('users/profile', { recipes: recipeLookUp})
     }catch(err){
         console.log(err)
     }
@@ -66,9 +73,15 @@ router.put('/recipes/:label', async (req,res) => {
 })
 
 //Delete /recipe/:label -- DELETE the comment
-router.delete('/recipes/:label', async (req,res) => {
+router.delete('/favorites/:label', async (req,res) => {
     try{
-        res.send('put a note on me')
+        const deleteRecipe = await db.recipe.destroy({
+            where: {
+                id: db.recipeId
+            }
+        })
+        console.log(deleteRecipe)
+        res.redirect('/')
     }catch(err){
         console.log(err)
     }
