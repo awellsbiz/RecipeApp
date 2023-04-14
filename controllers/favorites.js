@@ -36,7 +36,9 @@ router.get('/:commentId', async (req,res) => {
 router.put('/:commentId', async (req,res) => {
     try{
         const comment = await db.comment.findByPk(req.params.commentId)
+        const update = await comment.update({comment: req.body.comment})
         // edit the comment comment.update({comment: req.body.text})
+        console.log('HERE!!!!!!', update)
         res.redirect('/favorites')
     }catch(err){
         console.log(err)
@@ -60,7 +62,7 @@ router.get('/', async (req,res) => {
 })
 
 //PUT /recipe/:label -- UPDATE the comment
-router.put('/recipes/:label', async (req,res) => {
+router.put('/:recipeId', async (req,res) => {
     try{
         res.send('Edit my comment')
     }catch(err){
