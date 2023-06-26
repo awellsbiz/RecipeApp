@@ -1,9 +1,10 @@
 <%- include("../partials/header.ejs") %>
+<%- include("../partials/navbar.ejs") %>
 
 <div style="margin:0 0 8px 2.5vw">
   <h1 class="text-center">Search for the ingedients of you favorite dishes</h1>
-<a href="../favorites">Home</a>
-<a href="./users/logout">Log Out</a>
+<!-- <a href="../favorites">Home</a>
+<a href="./users/logout">Log Out</a> -->
 </div>
 <div class="mx-3">
 <div class="container-fluid">
@@ -40,8 +41,8 @@
           </div>
           <% }); %>
         </div>
-        <%} else { %>
-          <p>No recipes found.</p>
+        <%} else if (recipes.length = 0) { %>
+          <p style="margin: 0 auto;">Search Your Favorite Recipes.</p>
           <% } %>
           
 

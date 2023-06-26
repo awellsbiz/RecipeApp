@@ -1,0 +1,58 @@
+<style>
+    .navbar-light {
+        background-color: #f8f9fa; /* Light grey background color */
+    }
+    
+    .navbar-light .nav-link:hover {
+        background-color: #e9ecef; /* Hover background color */
+    }
+
+    @media (max-width: 768px) {
+        .navbar-nav {
+            flex-direction: column;
+        }
+
+        .navbar-collapse {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+            display: none;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 0.25rem;
+        }
+
+        .navbar-collapse.collapsed {
+            display: block;
+        }
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div>
+        <a class="navbar-brand" href="/">
+            Recipe Finder
+        </a>
+    </div>
+    <!-- <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <!-- <div class="navbar-collapse collapse" id="navbarNavAltMarkup"> -->
+        <div class="navbar-nav ms-auto">
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-lg-none" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Menu
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/recipes">Recipes</a></li>
+                    <li><a class="dropdown-item" href="/users/new">Sign Up</a></li>
+                    <li><a class="dropdown-item" href="/users/login">Log In</a></li>
+                </ul>
+            </div>
+            <a class="nav-item nav-link d-none d-lg-inline" href="/recipes">Recipes</a>
+            <a class="nav-item nav-link d-none d-lg-inline" href="/users/new">Sign Up</a>
+            <a class="nav-item nav-link d-none d-lg-inline" href="/users/login">Log In</a>
+        </div>
+    <!-- </div> -->
+</nav>

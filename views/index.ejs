@@ -1,24 +1,64 @@
 <%- include("./partials/header.ejs", { user: user}) %>
+<%- include("./partials/navbar.ejs") %>
+<style>
+  body {
+    background-image: url('https://legendofvelda.files.wordpress.com/2013/05/cooking-background-without-cookbook.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  } 
+  .searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 50vw;
+  }
+  .mainDiv {
+    background-color: white;
+    opacity: 0.8;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .searchBtn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    align-items: center;
+  }
 
+  @media only screen and (max-width: 600px) {
+    .searchbar {
+      width: 80vw;
+    }
+  }
+  
+  </style>
 
-<div class="indexDiv">
-  <div class="mx-auto" style="width: 50vw;">
+<div class="d-flex flex-column vh-100 justify-content-center align-items-center">
+  
+
+  <div class="mainDiv">
     <div class="text-center">
       <h1>Welcome</h1>
       <p>Search your favorite recipes and save them to your profile dont forget to leave comments for yourself to remember your ideas!</p>
     </div>
-  </div>
-
-<div class="mx-auto" style="width: 50vw;">
-  <div class="card text-center">
-    <div class="card-body">
-      <h5 class="card-title">Sign Up or Log In</h5>
-
-      <a href="/users/new" class="btn btn-primary">Sign Up</a>
-      <a href="/users/login" class="btn btn-primary">Log In</a>
+    <div class="searchbar">
+    <form action="/recipes" method="GET">
+      <input type="text" name="search" placeholder="Search for a recipe">
+      <input type="submit" value="Search" class="searchBtn">
+    </form>
     </div>
+   
   </div>
-  </div>
+
 </div>
 
 
